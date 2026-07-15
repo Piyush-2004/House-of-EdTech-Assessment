@@ -1,0 +1,88 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+model User {
+  id           String      @id @default(uuid())
+  email        String      @unique
+  passwordHash String
+  name         String
+  role         String      // "candidate" | "interviewer" | "admin"
+  createdAt    DateTime    @default(now())
+  sessions     Session[]
+  rateLimits   RateLimit[]
+}
+
+model JobDescription {
+  id          String    @id @default(uuid())
+  title       String
+  company     String
+  textContent String
+  createdAt   DateTime  @default(now())
+  sessions    Session[]
+}
+
+model JdCache {
+  hash       String   @id // SHA-256 hash of JD text
+  title      String
+  company    String
+  skills     String   // Comma-separated or JSON list of skills
+  questions  String   // JSON array of generated questions
+  createdAt  DateTime @default(now())
+}
+
+model Session {
+  id              String         @id @default(uuid())
+  userId          String
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jdId            String
+  jd              JobDescription @relation(fields: [jdId], references: [id], onDelete: Cascade)
+  resumeText      String         // Resume text uploaded for this session
+  status          String         // "in_progress" | "completed"
+  score           Float          @default(0.0)
+  feedbackSummary String         @default("")
+  gapAnalysis     String         @default("")
+  createdAt       DateTime       @default(now())
+  scoredAnswers   ScoredAnswer[]
+  questions       QuestionBank[]
+}
+
+model QuestionBank {
+  id               String         @id @default(uuid())
+  sessionId        String
+  session          Session        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  questionText     String
+  expectedKeywords String         // Comma-separated expected keywords/skills
+  difficulty       String         // "easy" | "medium" | "hard"
+  category         String         // e.g. "technical", "behavioral"
+  createdAt        DateTime       @default(now())
+  scoredAnswers    ScoredAnswer[]
+}
+
+model ScoredAnswer {
+  id            String       @id @default(uuid())
+  sessionId     String
+  session       Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  questionId    String
+  question      QuestionBank @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionText  String
+  answerText    String
+  score         Float
+  feedback      String
+  matchingScore Float
+  gapAnalysis   String
+  createdAt     DateTime     @default(now())
+}
+
+model RateLimit {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String   // e.g., "gemini_call"
+  timestamp DateTime @default(now())
+}
