@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import gsap from "gsap";
 import { 
   Sparkles, 
   ArrowRight, 
@@ -39,6 +40,24 @@ export default function InterviewClient({ session }: InterviewClientProps) {
       setCurrentQuestionIdx(scoredAnswers.length);
     }
   }, [scoredAnswers, questions]);
+
+  // GSAP: slide-in next question card when index changes
+  useEffect(() => {
+    gsap.fromTo(".interview-animate-question",
+      { x: 50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.2)" }
+    );
+  }, [currentQuestionIdx]);
+
+  // GSAP: slide-up feedback panel when available
+  useEffect(() => {
+    if (currentFeedback) {
+      gsap.fromTo(".interview-animate-feedback",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+      );
+    }
+  }, [currentFeedback]);
 
   const currentQuestion = questions[currentQuestionIdx];
   const isLastQuestion = currentQuestionIdx === questions.length - 1;
@@ -123,8 +142,8 @@ export default function InterviewClient({ session }: InterviewClientProps) {
       {/* Session Progress Header */}
       <div className="glass-panel p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Active Mock Interview</span>
-          <h2 className="text-xl font-bold text-white leading-tight mt-0.5">
+          <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Active Mock Interview</span>
+          <h2 className="text-xl font-bold text-slate-800 leading-tight mt-0.5">
             {jd.title} at {jd.company}
           </h2>
         </div>
@@ -132,12 +151,12 @@ export default function InterviewClient({ session }: InterviewClientProps) {
         {/* Progress Bar */}
         <div className="flex flex-col md:items-end gap-1.5 min-w-[200px]">
           <div className="flex justify-between w-full text-xs font-semibold">
-            <span className="text-slate-400">Questions Answered</span>
-            <span className="text-white">{completedAnswers.length} / {questions.length}</span>
+            <span className="text-slate-500">Questions Answered</span>
+            <span className="text-slate-800">{completedAnswers.length} / {questions.length}</span>
           </div>
-          <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-white/5">
+          <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden border border-slate-100">
             <div 
-              className="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 transition-all duration-500 ease-out"
+              className="h-full bg-gradient-to-r from-indigo-600 to-emerald-500 transition-all duration-500 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -148,15 +167,15 @@ export default function InterviewClient({ session }: InterviewClientProps) {
       {!completing ? (
         <div className="grid grid-cols-1 gap-6">
           {/* Question Display Panel */}
-          <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden space-y-4">
+          <div className="interview-animate-question glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden space-y-4">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full capitalize">
+              <span className="text-xs font-bold bg-indigo-50 text-indigo-600 border border-indigo-200 px-2 py-0.5 rounded-full capitalize">
                 Question {currentQuestionIdx + 1} of {questions.length}
               </span>
               <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${
-                currentQuestion.difficulty === "hard" ? "bg-rose-500/10 text-rose-400 border-rose-500/20" :
-                currentQuestion.difficulty === "medium" ? "bg-amber-500/10 text-amber-400 border-amber-500/20" :
-                "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                currentQuestion.difficulty === "hard" ? "bg-rose-50 text-rose-600 border-rose-200" :
+                currentQuestion.difficulty === "medium" ? "bg-amber-50 text-amber-600 border-amber-200" :
+                "bg-emerald-50 text-emerald-600 border-emerald-200"
               }`}>
                 {currentQuestion.difficulty}
               </span>
@@ -167,11 +186,11 @@ export default function InterviewClient({ session }: InterviewClientProps) {
                 AI
               </div>
               <div className="space-y-3">
-                <p className="text-lg font-bold text-white leading-relaxed">
+                <p className="text-lg font-bold text-slate-800 leading-relaxed">
                   {currentQuestion.questionText}
                 </p>
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <MessageSquareText className="w-3.5 h-3.5 text-slate-500" />
+                <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                  <MessageSquareText className="w-3.5 h-3.5 text-slate-400" />
                   <span>Topic: {currentQuestion.category}</span>
                 </div>
               </div>
@@ -180,25 +199,25 @@ export default function InterviewClient({ session }: InterviewClientProps) {
 
           {/* Feedback Display (renders right after answer submission) */}
           {currentFeedback && (
-            <div className="glass-panel p-6 rounded-2xl bg-indigo-950/20 border border-indigo-500/25 animate-fade-in space-y-4">
-              <div className="flex items-center justify-between border-b border-indigo-500/10 pb-3">
-                <h4 className="font-bold text-sm text-indigo-300 flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4" />
+            <div className="interview-animate-feedback glass-panel p-6 rounded-2xl bg-emerald-50/40 border border-emerald-200 space-y-4 shadow-sm">
+              <div className="flex items-center justify-between border-b border-emerald-200 pb-3">
+                <h4 className="font-bold text-sm text-emerald-700 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-emerald-600" />
                   <span>Immediate AI Recruiter Feedback</span>
                 </h4>
                 
                 <div className="flex items-center gap-1">
-                  <Award className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm font-bold text-white">Score: </span>
-                  <span className="text-sm font-black text-emerald-400">{currentFeedback.score}/100</span>
+                  <Award className="w-4 h-4 text-emerald-600" />
+                  <span className="text-sm font-bold text-slate-700">Score: </span>
+                  <span className="text-sm font-black text-emerald-600">{currentFeedback.score}/100</span>
                 </div>
               </div>
 
-              <div className="text-sm text-slate-300 space-y-3 leading-relaxed">
+              <div className="text-sm text-slate-700 space-y-3 leading-relaxed">
                 <p>{currentFeedback.feedback}</p>
                 {currentFeedback.gapAnalysis && (
-                  <p className="text-xs text-rose-400 font-medium">
-                    <span className="font-bold text-slate-300">Target Gap: </span>
+                  <p className="text-xs text-rose-600 font-medium">
+                    <span className="font-bold text-slate-800">Target Gap: </span>
                     {currentFeedback.gapAnalysis}
                   </p>
                 )}
@@ -208,7 +227,7 @@ export default function InterviewClient({ session }: InterviewClientProps) {
                 {!isLastQuestion ? (
                   <button
                     onClick={handleNextQuestion}
-                    className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all active:scale-95 shadow-md shadow-indigo-600/10"
+                    className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all active:scale-95 shadow-sm"
                   >
                     <span>Next Question</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -216,7 +235,7 @@ export default function InterviewClient({ session }: InterviewClientProps) {
                 ) : (
                   <button
                     onClick={handleGenerateReport}
-                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:opacity-95 text-xs font-bold text-white transition-all active:scale-95 shadow-md"
+                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition-all active:scale-95 shadow-sm"
                   >
                     <Sparkles className="w-4 h-4" />
                     <span>Generate Skills Gap Report</span>
@@ -274,18 +293,18 @@ export default function InterviewClient({ session }: InterviewClientProps) {
         </div>
       ) : (
         /* Report Generation loading overlay */
-        <div className="glass-panel p-16 rounded-2xl text-center space-y-6 animate-pulse-glow max-w-lg mx-auto">
-          <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400">
+        <div className="glass-panel p-16 rounded-2xl text-center space-y-6 max-w-lg mx-auto bg-white border border-slate-200 shadow-lg">
+          <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-600">
             <Sparkles className="w-8 h-8 animate-spin" style={{ animationDuration: "3s" }} />
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-bold text-white">Compiling Interview Data</h3>
-            <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
+            <h3 className="text-xl font-bold text-slate-900">Compiling Interview Data</h3>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
               Gemini is evaluating your profile, aggregate responses, and matching keywords against the JD to generate a comprehensive gap report. Please wait...
             </p>
           </div>
-          <div className="w-48 h-1.5 bg-slate-950 rounded-full overflow-hidden mx-auto border border-white/5">
-            <div className="h-full bg-indigo-500 animate-[loadingBar_2s_infinite]" style={{ width: "30%" }} />
+          <div className="w-48 h-1.5 bg-slate-100 rounded-full overflow-hidden mx-auto border border-slate-200">
+            <div className="h-full bg-indigo-600 animate-[loadingBar_2s_infinite]" style={{ width: "30%" }} />
           </div>
           <style jsx>{`
             @keyframes loadingBar {

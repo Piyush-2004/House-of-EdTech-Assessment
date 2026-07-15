@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { UserSession } from "@/lib/auth";
+import gsap from "gsap";
 import { 
   Play, 
   FileText, 
@@ -28,6 +29,17 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    gsap.fromTo(".dash-animate-header",
+      { y: -15, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+    );
+    gsap.fromTo(".dash-animate-card",
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "back.out(1.2)" }
+    );
+  }, []);
 
   // Form State
   const [title, setTitle] = useState("");
@@ -180,38 +192,38 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
         {/* Statistics Cards Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:col-span-1">
           {/* Card: Overall Score */}
-          <div className="glass-panel p-5 rounded-2xl flex flex-col justify-between">
+          <div className="dash-animate-card glass-panel p-5 rounded-2xl flex flex-col justify-between">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg Score</span>
-              <Award className="w-5 h-5 text-indigo-400" />
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Avg Score</span>
+              <Award className="w-5 h-5 text-indigo-600" />
             </div>
             <div className="mt-4">
-              <span className="text-4xl font-extrabold text-white">{averageScore}%</span>
-              <p className="text-[11px] text-slate-400 mt-1">Average candidate fit score</p>
+              <span className="text-4xl font-extrabold text-slate-800">{averageScore}%</span>
+              <p className="text-[11px] text-slate-500 mt-1">Average candidate fit score</p>
             </div>
           </div>
 
           {/* Card: Total Interviews */}
-          <div className="glass-panel p-5 rounded-2xl flex flex-col justify-between">
+          <div className="dash-animate-card glass-panel p-5 rounded-2xl flex flex-col justify-between">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Mock</span>
-              <ClipboardList className="w-5 h-5 text-emerald-400" />
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Mock</span>
+              <ClipboardList className="w-5 h-5 text-emerald-600" />
             </div>
             <div className="mt-4">
-              <span className="text-4xl font-extrabold text-white">{totalSessions}</span>
-              <p className="text-[11px] text-slate-400 mt-1">{completedSessions.length} finished / {inProgressSessions.length} in progress</p>
+              <span className="text-4xl font-extrabold text-slate-800">{totalSessions}</span>
+              <p className="text-[11px] text-slate-500 mt-1">{completedSessions.length} finished / {inProgressSessions.length} in progress</p>
             </div>
           </div>
         </div>
 
         {/* Chart Card */}
-        <div className="glass-panel p-5 rounded-2xl lg:col-span-2 flex flex-col justify-between">
-          <div className="flex items-center justify-between border-b border-white/5 pb-3">
-            <h3 className="text-sm font-bold text-slate-300 flex items-center gap-1.5">
-              <TrendingUp className="w-4 h-4 text-indigo-400" />
+        <div className="dash-animate-card glass-panel p-5 rounded-2xl lg:col-span-2 flex flex-col justify-between">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <h3 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+              <TrendingUp className="w-4 h-4 text-indigo-600" />
               <span>Score Improvement Trend</span>
             </h3>
-            <span className="text-xs text-slate-400">Completed Sessions</span>
+            <span className="text-xs text-slate-500">Completed Sessions</span>
           </div>
           <div className="mt-4 flex-1 flex items-center">
             {renderScoreChart()}
@@ -220,16 +232,16 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
       </div>
 
       {/* Mock Interviews Section */}
-      <div className="space-y-4">
+      <div className="dash-animate-header space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <Layers className="w-5 h-5 text-indigo-400" />
+          <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <Layers className="w-5 h-5 text-indigo-600" />
             <span>Interview Sessions</span>
           </h2>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-sm font-semibold text-white rounded-xl shadow-lg shadow-indigo-600/15 transition-all"
+            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-sm font-semibold text-white rounded-xl shadow-sm transition-all"
           >
             <Plus className="w-4 h-4" />
             <span>Start Practice</span>
@@ -237,13 +249,13 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
         </div>
 
         {sessions.length === 0 ? (
-          <div className="glass-panel p-12 rounded-2xl text-center space-y-4">
-            <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-xl bg-slate-500/10 border border-white/5 text-slate-400">
+          <div className="dash-animate-card glass-panel p-12 rounded-2xl text-center space-y-4">
+            <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 text-slate-500">
               <ClipboardList className="w-6 h-6" />
             </div>
             <div className="max-w-md mx-auto">
-              <h3 className="text-lg font-bold text-white">No interview sessions yet</h3>
-              <p className="text-sm text-slate-400 mt-1">
+              <h3 className="text-lg font-bold text-slate-800">No interview sessions yet</h3>
+              <p className="text-sm text-slate-500 mt-1">
                 Upload your resume and a target job description to trigger your first interactive AI mock interview.
               </p>
             </div>
@@ -264,14 +276,14 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
               });
 
               return (
-                <div key={session.id} className="glass-panel p-6 rounded-2xl flex flex-col justify-between gap-6 hover:translate-y-[-2px]">
+                <div key={session.id} className="dash-animate-card glass-panel p-6 rounded-2xl flex flex-col justify-between gap-6 hover:translate-y-[-2px]">
                   <div className="space-y-2">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <h3 className="font-bold text-lg text-white leading-snug">
+                        <h3 className="font-bold text-lg text-slate-800 leading-snug">
                           {session.jd.title}
                         </h3>
-                        <p className="text-sm font-medium text-slate-400">
+                        <p className="text-sm font-medium text-slate-500">
                           {session.jd.company}
                         </p>
                       </div>
@@ -279,33 +291,33 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
                       {/* Status / Score Badge */}
                       {session.status === "completed" ? (
                         <div className="flex flex-col items-end">
-                          <span className="text-2xl font-black text-emerald-400">{session.score}%</span>
-                          <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Score</span>
+                          <span className="text-2xl font-black text-emerald-600">{session.score}%</span>
+                          <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Score</span>
                         </div>
                       ) : (
-                        <span className="text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-1 rounded uppercase tracking-wider animate-pulse">
+                        <span className="text-[10px] font-bold bg-amber-50 text-amber-600 border border-amber-200 px-2 py-1 rounded uppercase tracking-wider animate-pulse">
                           In Progress
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-4 text-xs text-slate-400 pt-2">
+                    <div className="flex items-center gap-4 text-xs text-slate-500 pt-2">
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-indigo-400" />
+                        <Calendar className="w-3.5 h-3.5 text-indigo-600" />
                         {formattedDate}
                       </span>
-                      <span className="text-slate-700">|</span>
+                      <span className="text-slate-200">|</span>
                       <span>
                         {session.scoredAnswers.length} / {session.questions.length} Answered
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-end border-t border-white/5 pt-4 mt-2">
+                  <div className="flex items-center justify-end border-t border-slate-200 pt-4 mt-2">
                     {session.status === "completed" ? (
                       <Link
                         href={`/report/${session.id}`}
-                        className="flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors"
+                        className="flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-500 transition-colors"
                       >
                         <FileText className="w-4 h-4" />
                         <span>View Gap Report</span>
@@ -329,25 +341,25 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
 
       {/* Start Interview Modal / Overlay */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-2xl glass-panel-glow glass-panel rounded-2xl max-h-[90vh] overflow-y-auto p-6 md:p-8 space-y-6 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-2xl glass-panel rounded-2xl max-h-[90vh] overflow-y-auto p-6 md:p-8 space-y-6 relative bg-white border border-slate-200 shadow-xl">
             
             {/* Close Button */}
             <button
               onClick={() => !loading && setIsModalOpen(false)}
               disabled={loading}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors disabled:opacity-50"
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors disabled:opacity-50"
             >
               <X className="w-6 h-6" />
             </button>
 
-            <div className="flex items-center gap-3 border-b border-white/5 pb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+            <div className="flex items-center gap-3 border-b border-slate-200 pb-4">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Setup Mock Interview</h3>
-                <p className="text-xs text-slate-400 mt-0.5">Define your target job to customize questions.</p>
+                <h3 className="text-xl font-bold text-slate-900">Setup Mock Interview</h3>
+                <p className="text-xs text-slate-500 mt-0.5">Define your target job to customize questions.</p>
               </div>
             </div>
 
@@ -421,7 +433,7 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Mock Interview Length
                   </label>
                   <select
@@ -440,7 +452,7 @@ export default function DashboardClient({ initialSessions, user }: DashboardClie
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-95 active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2"
+                    className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none shadow-sm flex items-center justify-center gap-2"
                   >
                     {loading ? (
                       <>

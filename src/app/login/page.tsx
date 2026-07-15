@@ -45,32 +45,32 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md glass-panel p-8 rounded-2xl animate-fade-in">
+    <div className="w-full max-w-md glass-panel p-8 rounded-2xl animate-fade-in bg-white border border-slate-200 shadow-md">
       <div className="text-center mb-8">
-        <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/25 mb-4">
-          <LogIn className="w-6 h-6 text-indigo-400" />
+        <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-200 mb-4">
+          <LogIn className="w-6 h-6 text-indigo-600" />
         </div>
-        <h2 className="text-3xl font-extrabold text-white tracking-tight">
+        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
           Welcome Back
         </h2>
-        <p className="text-sm text-slate-400 mt-2">
+        <p className="text-sm text-slate-500 mt-2">
           Sign in to continue your interview preparation
         </p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-medium">
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-sm font-medium">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+          <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
             Email Address
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
               <Mail className="w-5 h-5" />
             </span>
             <input
@@ -85,11 +85,11 @@ function LoginForm() {
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+          <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
             Password
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
               <Lock className="w-5 h-5" />
             </span>
             <input
@@ -106,30 +106,30 @@ function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-95 active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none shadow-lg shadow-indigo-500/20"
+          className="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none shadow-sm"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
       </form>
 
-      <p className="mt-8 text-center text-sm text-slate-400">
+      <p className="mt-8 text-center text-sm text-slate-500">
         Don't have an account?{" "}
         <Link
           href="/register"
-          className="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
+          className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors"
         >
           Sign up now
         </Link>
       </p>
 
       {/* Credentials hints for assignment reviewers */}
-      <div className="mt-6 p-4 rounded-xl bg-slate-500/5 border border-white/5 text-xs text-slate-400 space-y-1">
-        <p className="font-semibold text-slate-300">Default Demo Accounts:</p>
+      <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+        <p className="font-semibold text-slate-700">Default Demo Accounts:</p>
         <p>
-          Candidate: <code className="text-emerald-400">candidate@interviewprep.com</code> / <code className="text-emerald-400">candidate123</code>
+          Candidate: <code className="text-emerald-600 font-bold">candidate@interviewprep.com</code> / <code className="text-emerald-650 font-bold">candidate123</code>
         </p>
         <p>
-          Admin: <code className="text-indigo-400">admin@interviewprep.com</code> / <code className="text-indigo-400">admin123</code>
+          Admin: <code className="text-indigo-600 font-bold">admin@interviewprep.com</code> / <code className="text-indigo-650 font-bold">admin123</code>
         </p>
       </div>
     </div>

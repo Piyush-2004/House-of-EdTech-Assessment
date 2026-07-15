@@ -67,48 +67,48 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
         {/* Total Candidates */}
         <div className="glass-panel p-5 rounded-2xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Tests</span>
-            <Users className="w-5 h-5 text-indigo-400" />
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Tests</span>
+            <Users className="w-5 h-5 text-indigo-600" />
           </div>
           <div className="mt-4">
-            <span className="text-3xl font-extrabold text-white">{totalCount}</span>
-            <p className="text-[11px] text-slate-400 mt-1">{completedCount} completed / {totalCount - completedCount} active</p>
+            <span className="text-3xl font-extrabold text-slate-800">{totalCount}</span>
+            <p className="text-[11px] text-slate-500 mt-1">{completedCount} completed / {totalCount - completedCount} active</p>
           </div>
         </div>
 
         {/* Avg Performance */}
         <div className="glass-panel p-5 rounded-2xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg Fit Match</span>
-            <Award className="w-5 h-5 text-emerald-400" />
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Avg Fit Match</span>
+            <Award className="w-5 h-5 text-emerald-600" />
           </div>
           <div className="mt-4">
-            <span className="text-3xl font-extrabold text-white">{averageScore}%</span>
-            <p className="text-[11px] text-slate-400 mt-1">Across all completed mocks</p>
+            <span className="text-3xl font-extrabold text-slate-800">{averageScore}%</span>
+            <p className="text-[11px] text-slate-500 mt-1">Across all completed mocks</p>
           </div>
         </div>
 
         {/* High Match Count */}
         <div className="glass-panel p-5 rounded-2xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">High Fit (≥80%)</span>
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">High Fit (≥80%)</span>
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
           </div>
           <div className="mt-4">
-            <span className="text-3xl font-extrabold text-emerald-400">{highFitCount}</span>
-            <p className="text-[11px] text-slate-400 mt-1">Strong candidates matching JDs</p>
+            <span className="text-3xl font-extrabold text-emerald-600">{highFitCount}</span>
+            <p className="text-[11px] text-slate-500 mt-1">Strong candidates matching JDs</p>
           </div>
         </div>
 
         {/* Moderate Match Count */}
         <div className="glass-panel p-5 rounded-2xl flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Moderate Fit (60-79%)</span>
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Moderate Fit (60-79%)</span>
             <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
           </div>
           <div className="mt-4">
-            <span className="text-3xl font-extrabold text-amber-400">{moderateFitCount}</span>
-            <p className="text-[11px] text-slate-400 mt-1">Candidates requiring minor upskilling</p>
+            <span className="text-3xl font-extrabold text-amber-600">{moderateFitCount}</span>
+            <p className="text-[11px] text-slate-500 mt-1">Candidates requiring minor upskilling</p>
           </div>
         </div>
       </div>
@@ -145,20 +145,20 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
       </div>
 
       {/* Candidates Session Table */}
-      <div className="glass-panel rounded-2xl overflow-hidden shadow-xl">
+      <div className="glass-panel rounded-2xl overflow-hidden shadow-sm bg-white border border-slate-200">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs md:text-sm">
             <thead>
-              <tr className="border-b border-white/5 bg-white/[0.01] text-slate-400 font-semibold">
-                <th className="p-4 pl-6 text-slate-400 uppercase tracking-wider text-[10px]">Candidate</th>
-                <th className="p-4 text-slate-400 uppercase tracking-wider text-[10px]">Target Role & Company</th>
-                <th className="p-4 text-slate-400 uppercase tracking-wider text-[10px]">Date Taken</th>
-                <th className="p-4 text-slate-400 uppercase tracking-wider text-[10px]">Status</th>
-                <th className="p-4 text-slate-400 uppercase tracking-wider text-[10px]">Score</th>
-                <th className="p-4 pr-6 text-right text-slate-400 uppercase tracking-wider text-[10px]">Actions</th>
+              <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 font-semibold">
+                <th className="p-4 pl-6 text-slate-500 uppercase tracking-wider text-[10px]">Candidate</th>
+                <th className="p-4 text-slate-500 uppercase tracking-wider text-[10px]">Target Role & Company</th>
+                <th className="p-4 text-slate-500 uppercase tracking-wider text-[10px]">Date Taken</th>
+                <th className="p-4 text-slate-500 uppercase tracking-wider text-[10px]">Status</th>
+                <th className="p-4 text-slate-500 uppercase tracking-wider text-[10px]">Score</th>
+                <th className="p-4 pr-6 text-right text-slate-500 uppercase tracking-wider text-[10px]">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-slate-300">
+            <tbody className="divide-y divide-slate-100 text-slate-700">
               {filteredSessions.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="p-8 text-center text-slate-500 italic">
@@ -174,11 +174,11 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
                   });
 
                   return (
-                    <tr key={session.id} className="hover:bg-white/[0.01] transition-colors">
+                    <tr key={session.id} className="hover:bg-slate-50/50 transition-colors">
                       {/* Candidate */}
                       <td className="p-4 pl-6">
                         <div className="flex flex-col">
-                          <span className="font-bold text-white text-xs md:text-sm">{session.user.name}</span>
+                          <span className="font-bold text-slate-800 text-xs md:text-sm">{session.user.name || "Anonymous Candidate"}</span>
                           <span className="text-[10px] text-slate-500 mt-0.5">{session.user.email}</span>
                         </div>
                       </td>
@@ -186,15 +186,15 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
                       {/* Job Info */}
                       <td className="p-4">
                         <div className="flex flex-col">
-                          <span className="font-semibold text-slate-200 text-xs md:text-sm">{session.jd.title}</span>
-                          <span className="text-[10px] text-slate-400 mt-0.5">{session.jd.company}</span>
+                          <span className="font-semibold text-slate-800 text-xs md:text-sm">{session.jd.title}</span>
+                          <span className="text-[10px] text-slate-500 mt-0.5">{session.jd.company}</span>
                         </div>
                       </td>
 
                       {/* Date */}
                       <td className="p-4">
-                        <div className="flex items-center gap-1.5 text-slate-400 text-xs">
-                          <Calendar className="w-3.5 h-3.5 text-indigo-400" />
+                        <div className="flex items-center gap-1.5 text-slate-500 text-xs">
+                          <Calendar className="w-3.5 h-3.5 text-indigo-600" />
                           <span>{formattedDate}</span>
                         </div>
                       </td>
@@ -202,12 +202,12 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
                       {/* Status */}
                       <td className="p-4">
                         {session.status === "completed" ? (
-                          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded uppercase tracking-wider">
+                          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded uppercase tracking-wider">
                             <CheckCircle className="w-2.5 h-2.5" />
                             Completed
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded uppercase tracking-wider">
+                          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded uppercase tracking-wider">
                             <Clock className="w-2.5 h-2.5" />
                             Active
                           </span>
@@ -217,7 +217,7 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
                       {/* Score */}
                       <td className="p-4">
                         {session.status === "completed" ? (
-                          <span className="font-black text-sm text-emerald-400">{session.score}%</span>
+                          <span className="font-black text-sm text-emerald-600">{session.score}%</span>
                         ) : (
                           <span className="text-slate-500 italic text-xs">Pending</span>
                         )}
@@ -228,7 +228,7 @@ export default function AdminClient({ initialSessions, user }: AdminClientProps)
                         {session.status === "completed" ? (
                           <Link
                             href={`/report/${session.id}`}
-                            className="inline-flex items-center gap-1 text-xs font-bold text-indigo-400 hover:text-indigo-300 hover:underline transition-colors"
+                            className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:text-indigo-500 hover:underline transition-colors"
                           >
                             <span>Report</span>
                             <ExternalLink className="w-3.5 h-3.5" />

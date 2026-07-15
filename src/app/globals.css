@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0f19;
-  --foreground: #f1f5f9;
+  --background: #f8fafc; /* Soft warm-white background */
+  --foreground: #0f172a; /* Deep charcoal text */
   
-  --panel-bg: #111827; /* Clean Slate Card */
-  --panel-border: #1f2937; /* Clean Dark-Gray Border */
-  --panel-border-hover: #374151;
+  --panel-bg: #ffffff; /* Solid White Card Panel */
+  --panel-border: #e2e8f0; /* Thin Slate Border */
+  --panel-border-hover: #cbd5e1;
   
-  --primary: #4f46e5; /* Indigo */
+  --primary: #4f46e5; /* Premium Indigo */
   --primary-hover: #4338ca;
-  --secondary: #10b981; /* Emerald */
-  --secondary-hover: #059669;
+  --secondary: #059669; /* Forest Emerald */
+  --secondary-hover: #047857;
   
   --font-sans: var(--font-inter);
 }
@@ -32,7 +32,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Minimalist mesh gradients */
+/* Light clean background decoration placeholder (WebGL constellation will mount on top) */
 .bg-gradient-mesh {
   position: fixed;
   top: 0;
@@ -40,54 +40,57 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-color: #0b0f19;
+  background-color: #f8fafc;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.05) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.02) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
-/* Professional Slate Panels */
+/* Premium Light Cards */
 .glass-panel {
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-panel:hover {
   border-color: var(--panel-border-hover);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
 }
 
 .glass-panel-glow {
   border-color: var(--panel-border-hover);
 }
 
+/* Light Mode Input Elements */
 .glass-input {
-  background: #0f172a;
-  border: 1px solid var(--panel-border);
-  color: #f8fafc;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
   transition: all 0.15s ease-in-out;
 }
 
 .glass-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary);
-  background: #0f172a;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  background: #ffffff;
 }
 
 .glass-btn {
-  background: #1f2937;
-  border: 1px solid var(--panel-border);
-  color: #f1f5f9;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   transition: all 0.15s ease-in-out;
 }
 
 .glass-btn:hover:not(:disabled) {
-  background: #374151;
-  border-color: var(--panel-border-hover);
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
   transform: translateY(-0.5px);
 }
 
@@ -95,45 +98,26 @@ body {
   transform: translateY(0);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(12px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Clean Simple Scrollbar */
+/* Scrollbar Customization for Light Theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1f2937;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: #94a3b8;
 }
 
-/* Standard typing indicator dots */
+/* Typing Indicator bouncing dots */
 .typing-dot {
   animation: typingBounce 1.4s infinite ease-in-out both;
 }
@@ -144,4 +128,14 @@ body {
 @keyframes typingBounce {
   0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
   40% { transform: scale(1); opacity: 1; }
+}
+
+/* Entrance Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

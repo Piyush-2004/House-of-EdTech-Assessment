@@ -23,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="flex flex-col h-full bg-[#0b0f19] text-slate-100 selection:bg-indigo-500/30 selection:text-white">
+      <body className="flex flex-col h-full bg-slate-50 text-slate-900 selection:bg-indigo-500/10 selection:text-indigo-900 font-sans">
         {/* Sleek background decoration */}
         <div className="bg-gradient-mesh" />
 
@@ -36,10 +36,10 @@ export default async function RootLayout({
         </main>
 
         {/* Premium footer */}
-        <footer className="w-full mt-auto py-8 px-6 border-t border-slate-800 bg-[#060910]/40 backdrop-blur-md">
+        <footer className="w-full mt-auto py-8 px-6 border-t border-slate-200 bg-white/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <p className="text-sm font-semibold text-slate-300">
+              <p className="text-sm font-bold text-slate-800">
                 PrepAI Mock Interviewer Platform
               </p>
               <p className="text-xs text-slate-500 mt-1">
@@ -48,24 +48,24 @@ export default async function RootLayout({
             </div>
             
             <div className="flex flex-col items-center md:items-end text-center md:text-right gap-1.5">
-              <span className="text-xs font-medium text-slate-400">
-                Developed by: <span className="text-indigo-400 font-semibold">Piyush Kumar</span>
+              <span className="text-xs font-medium text-slate-600">
+                Developed by: <span className="text-indigo-600 font-bold">Piyush Kumar</span>
               </span>
               <div className="flex items-center gap-4 text-xs font-semibold">
                 <a
                   href="https://github.com/Piyush-2004"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-500 hover:text-indigo-600 transition-colors"
                 >
                   GitHub Profile
                 </a>
-                <span className="text-slate-700">|</span>
+                <span className="text-slate-300">|</span>
                 <a
                   href="https://www.linkedin.com/in/piyush-kumar-2424b6215/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-500 hover:text-indigo-600 transition-colors"
                 >
                   LinkedIn Profile
                 </a>

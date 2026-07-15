@@ -37,10 +37,10 @@ export default async function DashboardPage() {
       {/* Welcome Section */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            Hi, <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">{user.name}</span>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+            Hi, <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{user.name}</span>
           </h1>
-          <p className="text-slate-400 mt-1.5 text-sm md:text-base">
+          <p className="text-slate-500 mt-1.5 text-sm md:text-base">
             Track your performance, review skill gaps, and practice mock interviews tailored to your target jobs.
           </p>
         </div>

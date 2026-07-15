@@ -45,10 +45,10 @@ export default async function AdminPage() {
     <div className="space-y-8">
       {/* Admin Title Banner */}
       <div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-          Recruiter & <span className="bg-gradient-to-r from-emerald-400 to-indigo-400 bg-clip-text text-transparent">Admin Dashboard</span>
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+          Recruiter & <span className="bg-gradient-to-r from-emerald-600 to-indigo-600 bg-clip-text text-transparent">Admin Dashboard</span>
         </h1>
-        <p className="text-slate-400 mt-1.5 text-sm md:text-base">
+        <p className="text-slate-500 mt-1.5 text-sm md:text-base">
           Monitor candidate mock interview history, review score outputs, and evaluate skills gaps.
         </p>
       </div>
