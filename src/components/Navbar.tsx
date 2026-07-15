@@ -30,9 +30,8 @@ export default function Navbar({ user }: NavbarProps) {
       setLoading(false);
     }
   };
-
   return (
-    <header className="sticky top-0 z-50 w-full px-6 py-4 glass-panel border-b border-white/10 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full px-6 py-4 bg-[#090d16]/80 border-b border-slate-800 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">

@@ -23,20 +23,20 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-screen flex flex-col bg-[#090d16] text-[#f1f5f9] font-sans">
-        {/* Ambient mesh background */}
+      <body className="flex flex-col h-full bg-[#0b0f19] text-slate-100 selection:bg-indigo-500/30 selection:text-white">
+        {/* Sleek background decoration */}
         <div className="bg-gradient-mesh" />
 
-        {/* Global navigation header */}
+        {/* Global sticky header navigation */}
         <Navbar user={user} />
 
-        {/* Core page contents */}
-        <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-8">
+        {/* Application page mount */}
+        <main className="flex-grow px-6 py-12 md:py-16">
           {children}
         </main>
 
         {/* Premium footer */}
-        <footer className="w-full mt-auto py-8 px-6 border-t border-white/5 bg-[#060910]/40 backdrop-blur-md">
+        <footer className="w-full mt-auto py-8 px-6 border-t border-slate-800 bg-[#060910]/40 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <p className="text-sm font-semibold text-slate-300">
@@ -53,7 +53,7 @@ export default async function RootLayout({
               </span>
               <div className="flex items-center gap-4 text-xs font-semibold">
                 <a
-                  href="https://github.com/piyushroy"
+                  href="https://github.com/Piyush-2004"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -62,7 +62,7 @@ export default async function RootLayout({
                 </a>
                 <span className="text-slate-700">|</span>
                 <a
-                  href="https://linkedin.com/in/piyushroy"
+                  href="https://www.linkedin.com/in/piyush-kumar-2424b6215/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
